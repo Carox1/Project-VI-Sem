@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styles from "../styles/navbar.module.css";
 import { SearchField } from "@aws-amplify/ui-react";
 import Badge from "@mui/material/Badge";
@@ -7,10 +6,6 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import Product from "./Product";
 
 const Navbar = ({isOpen, setIsOpen}) => {
-  const handleClick = () => {
-    setIsOpen(!isOpen)
-  }
-
 
   console.log(isOpen);
   return (
@@ -36,7 +31,6 @@ const Navbar = ({isOpen, setIsOpen}) => {
           <ShoppingCartOutlinedIcon fontSize="medium" color="action" />
         </Badge>
         <AccountCircleOutlinedIcon fontSize="large" />
-        <button onClick={handleClick}>Click here</button>
       </div>
       {
        isOpen && <Product isOpen={isOpen}/>

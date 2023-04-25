@@ -57,7 +57,7 @@ console.log(isOpen);
               wrap="nowrap"
               gap="1rem"
             >
-              <StepperField max={10} min={0} step={1} size="medium" label="" />
+              <StepperField max={10} min={1} step={1} size="medium" label="" />
               <Button variation="primary" size="small">
                 Add to cart
               </Button>
