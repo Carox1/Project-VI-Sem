@@ -1,22 +1,14 @@
-.container{
-  position: relative;
-}
 
 .product {
-  top: 30px;
-  left: -550px;
-  z-index: 3;
-  position: absolute;
+  
   display: flex;
-  width: 42vw;
-  flex-direction: column;
+  width: 100%;
   background-color: #ffffff;
   padding: 20px;
   transition: all 5s ease;
 }
-
-.active{
-  right: 0;
+.productRight{
+  flex: 2;
 }
 
 .imageset {
@@ -46,9 +38,10 @@
   border-radius: 50%;
   cursor: pointer;
 }
-.productTop{
+.productLeft{
   align-items: center;
   display: flex;
   justify-content: center;
+  flex: 1;
 
 }

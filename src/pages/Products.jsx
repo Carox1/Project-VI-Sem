@@ -7,7 +7,7 @@ const Products = () => {
   return (
     <Flex direction="row" marginTop='5px'>
         {data.map((item)=>
-        <Cards key={item.id} name={item.name} age={item.age} img={item.img} desc={item.description} gender={item.gender} rating={item.rating}/>)
+        <Cards key={item.id} id={item.id} name={item.name} age={item.age} img={item.img} desc={item.description} gender={item.gender} rating={item.rating}/>)
         }
       
     </Flex>

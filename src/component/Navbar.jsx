@@ -3,11 +3,11 @@ import { SearchField } from "@aws-amplify/ui-react";
 import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import Product from "./Product";
 
-const Navbar = ({isOpen, setIsOpen}) => {
 
-  console.log(isOpen);
+const Navbar = () => {
+
+  
   return (
     <div className={styles.container}>
 
@@ -32,9 +32,6 @@ const Navbar = ({isOpen, setIsOpen}) => {
         </Badge>
         <AccountCircleOutlinedIcon fontSize="large" />
       </div>
-      {
-       isOpen && <Product isOpen={isOpen}/>
-      }
     </div>
     </div>
   );

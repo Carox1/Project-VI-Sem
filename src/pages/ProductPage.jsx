@@ -8,12 +8,12 @@ import {
 } from "@aws-amplify/ui-react";
 import styles from "../styles/product.module.css";
 
-const Product = ({isOpen}) => {
-console.log(isOpen);
+const ProductPage = () => {
+
   return (
     <div className={styles.container}>
-      <div className={`${styles.product} ${!isOpen ? '' : styles.active}`}>
-      <div className={styles.productTop}>
+      <div className={styles.product} >
+      <div className={styles.productLeft}>
         <div className={styles.imageset}>
           <img
             src="https://images.pexels.com/photos/4587982/pexels-photo-4587982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -22,7 +22,7 @@ console.log(isOpen);
           />
         </div>
       </div>
-      <div className={styles.productBottom}>
+      <div className={styles.productRight}>
         <div className={styles.productInfo}>
           <div className={styles.productDetail}>
             <Heading level={2} fontWeight={350}> Bull Dog</Heading>
@@ -57,8 +57,8 @@ console.log(isOpen);
               wrap="nowrap"
               gap="1rem"
             >
-              <StepperField max={10} min={1} step={1} size="medium" label="" />
-              <Button variation="primary" size="small">
+              <StepperField max={10} min={1} step={1} size="medium" label="" width="150px" />
+              <Button variation="primary" size="small" width="150px">
                 Add to cart
               </Button>
             </Flex>
@@ -82,4 +82,4 @@ console.log(isOpen);
   );
 };
 
-export default Product;
+export default ProductPage;
