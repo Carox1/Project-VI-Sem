@@ -1,11 +1,12 @@
 import styles from "../styles/navbar.module.css";
-import { SearchField } from "@aws-amplify/ui-react";
+import { SearchField,Button} from "@aws-amplify/ui-react";
 import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 
-const Navbar = () => {
+
+const Navbar = (signOut) => {
 
   
   return (
@@ -31,6 +32,13 @@ const Navbar = () => {
           <ShoppingCartOutlinedIcon fontSize="medium" color="action" />
         </Badge>
         <AccountCircleOutlinedIcon fontSize="large" />
+        <Button
+  loadingText="Logging"
+  onClick={signOut}
+>
+  LogOut
+</Button>
+        
       </div>
     </div>
     </div>

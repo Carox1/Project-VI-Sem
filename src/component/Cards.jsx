@@ -11,7 +11,7 @@ import {
 } from '@aws-amplify/ui-react';
 import "../styles/cards.css";
 import { Link } from 'react-router-dom';
-export const Cards = (props) => {
+export const Cards = ({item}) => {
   const { tokens } = useTheme();
 
   return (
@@ -19,7 +19,8 @@ export const Cards = (props) => {
       backgroundColor={tokens.colors.background.secondary}
       padding={tokens.space.medium}
     >
-      <Link to={`/product/${props.id}`}>
+
+      <Link className='link'  to={`/product/${item.id}`}>
       <Card>
 
 <Flex 
@@ -30,7 +31,7 @@ alignContent="center"
 wrap="nowrap">
   <Image
     alt="Road to milford sound"
-    src={props.img}
+    src={item.img}
     height="75%"
     width="75%"
     objectFit="initial"
@@ -42,19 +43,19 @@ wrap="nowrap">
   >
     <Flex>
       <Badge size="small" variation="info">
-        {props.gender}
+        {item.gender}
       </Badge>
       <Badge size="small" variation="success">
-        {props.age} Month
+        {item.age} Month
       </Badge>
     </Flex>
 
     <Heading level={5}>
-      {props.name}
+      {item.name}
     </Heading>
 
     <Rating
-value={props.rating}
+value={item.rating}
 maxValue={5}
 fillColor="hsl(38, 100%, 62%)"
 emptyColor="hsl(210, 5%, 94%)"

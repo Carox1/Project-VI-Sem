@@ -1,13 +1,15 @@
 import { Text,Image,View,useTheme,Heading,useAuthenticator,Button,Authenticator,signOut } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import Products from "./pages/Products";
-
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+ 
 const components = {
   Header() {
     const { tokens } = useTheme();

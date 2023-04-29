@@ -1,17 +1,13 @@
-import { Flex } from '@aws-amplify/ui-react';
-import { Cards } from '../component/Cards';
-import {data} from '../Data/data'
-
+import Product from "../component/Product";
+import ProductHeader from "../component/ProductHeader";
+import { data } from "../Data/data";
+import styles from "../styles/products.module.css";
 const Products = () => {
-    console.log(data);
   return (
-    <Flex direction="row" marginTop='5px'>
-        {data.map((item)=>
-        <Cards key={item.id} id={item.id} name={item.name} age={item.age} img={item.img} desc={item.description} gender={item.gender} rating={item.rating}/>)
-        }
-      
-    </Flex>
-  )
-}
-
-export default Products
+    <div className={styles.productheader}>
+    <ProductHeader/>
+      <Product data={data} />
+    </div>
+  );
+};
+export default Products;
