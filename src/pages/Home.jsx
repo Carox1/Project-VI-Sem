@@ -1,9 +1,15 @@
 import React from 'react'
-
-const Home = () => {
+import Category from '../component/Category'
+import styles from '../styles/home.module.css'
+import {Slider }from '../component/Slider'
+const Home = ({data}) => {
   return (
-    <div>
-      Home
+    <div className={styles.home}>
+      <Slider/>
+     <Category className={styles.category} data={data}/>
+     <Category className={styles.category} data={data}/>
+     <Category className={styles.category} data={data}/>
+     
     </div>
   )
 }

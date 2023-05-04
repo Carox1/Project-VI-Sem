@@ -1,8 +1,7 @@
 import Product from "../component/Product";
 import ProductHeader from "../component/ProductHeader";
-import { data } from "../Data/data";
 import styles from "../styles/products.module.css";
-const Products = () => {
+const Products = ({data}) => {
   return (
     <div className={styles.productheader}>
     <ProductHeader/>

@@ -5,7 +5,6 @@ import {
   Heading,
   Flex,
   Badge,
-  Text,
   useTheme,
   Rating,
 } from '@aws-amplify/ui-react';
@@ -21,7 +20,7 @@ export const Cards = ({item}) => {
     >
 
       <Link className='link'  to={`/product/${item.id}`}>
-      <Card>
+      <Card width='200px'>
 
 <Flex 
 direction="column"

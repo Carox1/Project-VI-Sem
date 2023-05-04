@@ -1,22 +1,6 @@
 {
-  "api": {
-    "apiec37ec8e": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "petpartner6a996987"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
   "auth": {
-    "petpartner5156a825": {
+    "myapp64d960df": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -29,8 +13,7 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL",
-          "NAME"
+          "EMAIL"
         ],
         "socialProviders": [],
         "usernameAttributes": [],
@@ -40,32 +23,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
-    }
-  },
-  "function": {
-    "petpartner6a996987": {
-      "build": true,
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_petpartner6a996987_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "petpartner6a996987"
-        }
-      ]
-    },
-    "AMPLIFY_function_petpartner6a996987_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "petpartner6a996987"
-        }
-      ]
     }
   }
 }

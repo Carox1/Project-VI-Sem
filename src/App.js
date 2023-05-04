@@ -1,4 +1,4 @@
-import { Text,Image,View,useTheme,Heading,useAuthenticator,Button,Authenticator,signOut } from "@aws-amplify/ui-react";
+import { Text,Image,View,useTheme,Heading,useAuthenticator,Button,Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./component/Footer";
@@ -8,6 +8,8 @@ import ProductPage from "./pages/ProductPage";
 import Products from "./pages/Products";
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
+import { data } from "./Data/data";
+
 Amplify.configure(awsExports);
  
 const components = {
@@ -244,8 +246,8 @@ function App() {
       <BrowserRouter>
         <Navbar signOut={signOut} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/" element={<Home data={data}/>} />
+          <Route path="/products" element={<Products data={data}/>} />
           <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
         <Footer />
