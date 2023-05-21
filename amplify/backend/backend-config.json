@@ -1,4 +1,20 @@
 {
+  "api": {
+    "productapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "petpartnerfunc"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "myapp64d960df": {
       "customAuth": false,
@@ -23,6 +39,48 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "petpartnerfunc": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "products"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_petpartnerfunc_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "petpartnerfunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_petpartnerfunc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "petpartnerfunc"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "products": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

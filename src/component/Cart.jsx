@@ -1,8 +1,10 @@
 import React from 'react'
 import styles from "../styles/cart.module.css";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined"
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
+    const cart = useSelector(state => state.cart)
     const data = [
         {
             id: 1,

@@ -6,11 +6,8 @@ import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import Products from "./pages/Products";
-import { Amplify } from 'aws-amplify';
-import awsExports from './aws-exports';
-import { data } from "./Data/data";
 
-Amplify.configure(awsExports);
+import { data } from "./Data/data";
  
 const components = {
   Header() {

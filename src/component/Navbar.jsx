@@ -5,16 +5,25 @@ import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Cart from './Cart';
+import { useSelector } from 'react-redux';
+import Profile from './Profile'
 
 const Navbar = ({signOut}) => {
   const [open, setOpen] = useState(false)
-
+  const [profile, setProfile] = useState(true)
+  const quantity = useSelector(state => state.cart.quantity)
+  
 const handleClick = ()=> {
   setOpen(!open)
 }
+
+  const handleProfile = () => {
+    setProfile(!profile)
+  }
+
 console.log(open);
   return (
-    <div className={styles.container}>
+      <div className={styles.container}>
       <div className={styles.navbar}>
         <div className={styles.navbar_left}>
           <h3 className={styles.fontlogo}>Pet Partner</h3>
@@ -32,17 +41,22 @@ console.log(open);
           />
         </div>
         <div className={styles.navbar_right}>
-          <Badge badgeContent={4} color="primary" onClick={handleClick}>
+          <Badge badgeContent={quantity} color="primary" onClick={handleClick}>
             <ShoppingCartOutlinedIcon fontSize="medium" color="action" />
-          </Badge>
+          </Badge >
+          <Badge onClick={handleProfile}>
           <AccountCircleOutlinedIcon fontSize="large" />
+          </Badge>
           <Button loadingText="Logging" onClick={signOut}>
             LogOut
           </Button>
         </div>
       </div>
         {
-          open && <Cart/>
+        open && <Cart />
+        }
+      {
+        profile && <Profile/>
         }
     </div>
   );

@@ -1,0 +1,26 @@
+{
+  "resourceName": "products",
+  "tableName": "products",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "price",
+    "fieldType": "number"
+  },
+  "gsi": [
+    {
+      "name": "category-index",
+      "partitionKey": {
+        "fieldName": "category",
+        "fieldType": "string"
+      },
+      "sortKey": {
+        "fieldName": "price",
+        "fieldType": "number"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}

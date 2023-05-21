@@ -7,8 +7,24 @@ import {
   Text,
 } from "@aws-amplify/ui-react";
 import styles from "../styles/product.module.css";
+import { API } from "aws-amplify";
+import { useLocation } from "react-router-dom";
 
 const ProductPage = () => {
+  const apiName = "productapi";
+  const path = "/pet`";
+  const location = useLocation().pathname.split("/")[2];
+console.log(location);
+
+
+
+  API.get(apiName, path)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 
   return (
     <div className={styles.container}>
@@ -76,6 +92,8 @@ const ProductPage = () => {
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, quaerat officiis ut quidem, sint illum voluptatum animi corporis aspernatur delectus reprehenderit dicta veniam earum aliquid quam aliquam expedita. Nisi, accusamus.
             </Text>
             </div>
+           
+      
       </div>
     </div>
     </div>
