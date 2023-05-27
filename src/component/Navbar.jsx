@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import styles from "../styles/navbar.module.css";
 import { SearchField, Button } from "@aws-amplify/ui-react";
 import Badge from "@mui/material/Badge";
@@ -8,22 +8,24 @@ import Cart from './Cart';
 import { useSelector } from 'react-redux';
 import Profile from './Profile'
 
-const Navbar = ({signOut}) => {
+const Navbar = ({ signOut }) => {
   const [open, setOpen] = useState(false)
-  const [profile, setProfile] = useState(true)
+  const [profile, setProfile] = useState(false)
   const quantity = useSelector(state => state.cart.quantity)
-  
-const handleClick = ()=> {
-  setOpen(!open)
-}
+
+  const handleClick = () => {
+    setProfile(false)
+    setOpen(!open)
+  }
 
   const handleProfile = () => {
+    setOpen(false)
     setProfile(!profile)
   }
 
-console.log(open);
+  console.log(open);
   return (
-      <div className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.navbar}>
         <div className={styles.navbar_left}>
           <h3 className={styles.fontlogo}>Pet Partner</h3>
@@ -45,19 +47,19 @@ console.log(open);
             <ShoppingCartOutlinedIcon fontSize="medium" color="action" />
           </Badge >
           <Badge onClick={handleProfile}>
-          <AccountCircleOutlinedIcon fontSize="large" />
+            <AccountCircleOutlinedIcon fontSize="large" />
           </Badge>
           <Button loadingText="Logging" onClick={signOut}>
             LogOut
           </Button>
         </div>
       </div>
-        {
-        open && <Cart />
-        }
       {
-        profile && <Profile/>
-        }
+        open && <Cart />
+      }
+      {
+        profile && <Profile />
+      }
     </div>
   );
 };

@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 
 const Cart = () => {
     const cart = useSelector(state => state.cart)
+    console.log(cart);
+
     const data = [
         {
             id: 1,
@@ -27,8 +29,8 @@ const Cart = () => {
         },
     ]
   return (
-      <div className={styles.cart}>
-          <h1 className={styles.title}>Products in your Cart</h1>
+    <div className={styles.cart}>
+      <h1 className={styles.title}>Products in your Cart</h1>
           {data?.map(item => (
               <div className={styles.items} key={item.id}>
                   <img className={styles.img} src={item.img} alt="" />
@@ -46,7 +48,7 @@ const Cart = () => {
               <span>SUBTOTAL</span>
               <span>$123</span>
           </div>
-          <button>PROCEED TO CHECKOUT</button>
+          <button className={styles.button}>PROCEED TO CHECKOUT</button>
           <span className={styles.reset}>Reset Cart</span>
     </div>
   )

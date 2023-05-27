@@ -8,6 +8,7 @@ import ProductPage from "./pages/ProductPage";
 import Products from "./pages/Products";
 
 import { data } from "./Data/data";
+import ProductForm from "./pages/ProductForm";
  
 const components = {
   Header() {
@@ -243,7 +244,8 @@ function App() {
       <BrowserRouter>
         <Navbar signOut={signOut} />
         <Routes>
-          <Route path="/" element={<Home data={data}/>} />
+        <Route path="/" element={<Home data={data}/>} />
+          <Route path="/new" element={<ProductForm/>} />
           <Route path="/products" element={<Products data={data}/>} />
           <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
