@@ -5,13 +5,13 @@ const cartSlice = createSlice({
   initialState: {
     products: [],
     quantity: 0,
-    total: 0,
+    total: 0
   },
   reducers: {
     addProduct: (state, action) => {
       state.quantity += 1;
       state.products.push(action.payload);
-      state.total += parseInt(action.payload.price) * action.payload.quantity;
+      state.total += action.payload.price * action.payload.quantity;
     },
     removeProduct: (state, action) => {
       const { productId } = action.payload;
@@ -20,14 +20,19 @@ const cartSlice = createSlice({
       );
       if (productIndex !== -1) {
         const removedProduct = state.products[productIndex];
-        const removedQuantity = removedProduct.quantity; // Get the quantity of the removed product
-        state.quantity -= removedQuantity;
-        state.total -= removedProduct.price * removedQuantity;
+        state.quantity -= removedProduct.quantity;
+        state.total -=
+          removedProduct.price * removedProduct.quantity;
         state.products.splice(productIndex, 1);
       }
     },
-  },
+    resetCart: (state) => {
+      state.products = [];
+      state.quantity = 0;
+      state.total = 0;
+    }
+  }
 });
 
-export const { addProduct, removeProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;

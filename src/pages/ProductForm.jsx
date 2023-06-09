@@ -3,7 +3,7 @@ import styles from "../styles/productForm.module.css";
 import { API } from "aws-amplify";
 
 const ProductForm = () => {
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [vendor, setVendor] = useState("");
@@ -31,6 +31,7 @@ const ProductForm = () => {
       },
     };
 
+    console.log(myInit.body)
     API.post("petPartnerAPI", "/products", myInit)
   .then((response) => {
     console.log(myInit);
@@ -41,7 +42,7 @@ const ProductForm = () => {
   });
 
     // Reset the form
-    setPrice("");
+    setPrice(0);
     setImage("");
     setTitle("");
     setDescription("");
@@ -81,7 +82,7 @@ const ProductForm = () => {
           className={styles.input}
           type="number"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setPrice(parseInt(e.target.value))}
         />
       </div>
       <div className={styles.inputElement}>

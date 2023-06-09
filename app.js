@@ -9,10 +9,10 @@ See the License for the specific language governing permissions and limitations 
 
 /* Amplify Params - DO NOT EDIT
 	ENV
-	REGION
-	STORAGE_DBPETPRODUCT_ARN
-	STORAGE_DBPETPRODUCT_NAME
-	STORAGE_DBPETPRODUCT_STREAMARN
+	REGION 
+	STORAGE_ACHARYAPROD_ARN
+	STORAGE_ACHARYAPROD_NAME
+	STORAGE_ACHARYAPROD_STREAMARN
 Amplify Params - DO NOT EDIT */
 
 const express = require('express')
@@ -34,21 +34,21 @@ app.use(function(req, res, next) {
 
 const AWS = require('aws-sdk');
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-const table = process.env.STORAGE_DBPETPRODUCT_NAME
-async function getProduct(id) {
+const table = process.env.STORAGE_ACHARYAPROD_NAME
+async function getProduct(prodId) {
   const params = {
     TableName: table,
     Key: {
-      id
+      prodId
     }
   };
 
   try {
     const data = await dynamodb.get(params).promise();
     if (!data.Item) {
-      throw new Error(`Product with id ${id} not found in table`);
+      throw new Error(`Product with prodId ${prodId} not found in table`);
     }
-    console.log(`Product with id ${id} found in table:`, data.Item);
+    console.log(`Product with prodId ${prodId} found in table:`, data.Item);
     return data.Item;
   } catch (err) {
     console.error(err);
@@ -110,19 +110,17 @@ const timeStamp = () => {
 
 app.post('/products', function (req, res) {
   const item = {
-    id: id(),
+    prodId: id(),
     img: req.body.img,
     title: req.body.title,
     desc: req.body.desc,
+    original_price: req.body.original_price,
+    discount_price: req.body.discount_price,
     category: req.body.category,
     vendor: req.body.vendor,
     color: req.body.color,
     inStock: req.body.inStock,
     isNew: req.body.isNew,
-    price: req.body.price,
-    age: req.body.age,
-    weight: req.body.weight,
-    dose: req.body.dose,
     createdAt: timeStamp()
   };
   const params = {
@@ -158,10 +156,10 @@ app.get('/products', async function (req, res) {
  * Get single products                   *
  ****************************************/
 
-app.get('/products/:id', async function (req, res) {
+app.get('/products/:prodId', async function (req, res) {
   try {
-    const { id } = req.params;
-    const product = await getProduct(id);
+    const { prodId } = req.params;
+    const product = await getProduct(prodId);
     res.status(200).json(product);
   } catch (err) {
     console.error(err);
@@ -173,13 +171,13 @@ app.get('/products/:id', async function (req, res) {
 * Example delete method *
 *****************************/
 
-app.delete('/products/:id', function (req, res) {
-  const id = req.params.id;
+app.delete('/products/:prodId', function (req, res) {
+  const prodId = req.params.prodId;
 
   const params = {
     TableName: table,
     Key: {
-      id: id
+      prodId: prodId
     }
   };
 
@@ -196,14 +194,14 @@ app.delete('/products/:id', function (req, res) {
 * Example update method *
 ****************************/
 
-app.put('/products/:id', function (req, res) {
-  const id = req.params.id;
+app.put('/products/:prodId', function (req, res) {
+  const prodId = req.params.prodId;
   const updatedAttributes = req.body;
 
   const params = {
     TableName: table,
     Key: {
-      id: id
+      prodId: prodId
     },
     UpdateExpression: 'SET',
     ExpressionAttributeValues: {},

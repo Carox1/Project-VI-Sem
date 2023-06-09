@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StepperField,
   Button,
@@ -14,39 +14,36 @@ import { addProduct } from "../redux/cartRedux";
 
 const ProductPage = () => {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
+  const location = useLocation().pathname.split("/")[2];
+
+  useEffect(() => {
+    API.get("petPartnerAPI", `/products/${location}`)
+      .then((response) => {
+        setProduct(response);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, [location]);
+
   const handleCart = () => {
     dispatch(addProduct({ ...product, quantity }));
   };
-  const location = useLocation().pathname.split("/")[2];
-
-
-  API.get('petPartnerAPI', `/products/${location}`)
-    .then((response) => {
-      setProduct(response);
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
 
   return (
     <div className={styles.container}>
       <div className={styles.product}>
         <div className={styles.productLeft}>
           <div className={styles.imageset}>
-            <img
-              src={product.img}
-              alt=""
-              className={styles.headimg}
-            />
+            <img src={product.img} alt="" className={styles.headimg} />
           </div>
         </div>
         <div className={styles.productRight}>
           <div className={styles.productInfo}>
             <div className={styles.productDetail}>
               <Heading level={2} fontWeight={350}>
-                {" "}
                 {product.title}
               </Heading>
               <Text
@@ -96,6 +93,7 @@ const ProductPage = () => {
                   size="medium"
                   label=""
                   width="150px"
+                  value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
                 <Button
@@ -113,7 +111,6 @@ const ProductPage = () => {
             <Heading level={4} fontWeight={400}>
               Description:
             </Heading>
-
             <Text
               fontSize="1.2em"
               lineHeight="1.5em"
