@@ -40,15 +40,14 @@ export const Cards = ({ item }) => {
               gap={tokens.space.xs}
             >
               <Flex>
-                <Badge size="small" variation="info">
-                  {item.gender}
-                </Badge>
+                
                 <Badge size="small" variation="success">
                   {item.age} Month
                 </Badge>
               </Flex>
 
-              <Heading level={5}>{item.name}</Heading>
+              <Heading level={4} fontWeight={300}>₹{item.price}</Heading>
+              <Heading level={5}>{item.title}</Heading>
 
               <Rating
                 value={item.rating}

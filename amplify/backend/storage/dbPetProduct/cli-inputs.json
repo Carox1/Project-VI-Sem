@@ -1,13 +1,9 @@
 {
-  "resourceName": "products",
-  "tableName": "products",
+  "resourceName": "dbPetProduct",
+  "tableName": "dbPetProduct",
   "partitionKey": {
     "fieldName": "id",
     "fieldType": "string"
-  },
-  "sortKey": {
-    "fieldName": "price",
-    "fieldType": "number"
   },
   "gsi": [
     {
@@ -15,10 +11,6 @@
       "partitionKey": {
         "fieldName": "category",
         "fieldType": "string"
-      },
-      "sortKey": {
-        "fieldName": "price",
-        "fieldType": "number"
       }
     }
   ],

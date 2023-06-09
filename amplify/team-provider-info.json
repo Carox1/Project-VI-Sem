@@ -1,31 +1,36 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-myapp-dev-191027-authRole",
-      "UnauthRoleArn": "arn:aws:iam::954138568328:role/amplify-myapp-dev-191027-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::954138568328:role/amplify-myapp-dev-191027-authRole",
+      "AuthRoleName": "amplify-myapp-dev-175513-authRole",
+      "UnauthRoleArn": "arn:aws:iam::954138568328:role/amplify-myapp-dev-175513-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::954138568328:role/amplify-myapp-dev-175513-authRole",
       "Region": "ap-south-1",
-      "DeploymentBucketName": "amplify-myapp-dev-191027-deployment",
-      "UnauthRoleName": "amplify-myapp-dev-191027-unauthRole",
-      "StackName": "amplify-myapp-dev-191027",
-      "StackId": "arn:aws:cloudformation:ap-south-1:954138568328:stack/amplify-myapp-dev-191027/11113cb0-e9b8-11ed-8fed-02165d5d667c",
-      "AmplifyAppId": "d2cr66i50dmkaz"
+      "DeploymentBucketName": "amplify-myapp-dev-175513-deployment",
+      "UnauthRoleName": "amplify-myapp-dev-175513-unauthRole",
+      "StackName": "amplify-myapp-dev-175513",
+      "StackId": "arn:aws:cloudformation:ap-south-1:954138568328:stack/amplify-myapp-dev-175513/5ce565f0-0077-11ee-965a-025148d06844",
+      "AmplifyAppId": "de7h20jm7f8uf"
     },
     "categories": {
       "auth": {
-        "myapp64d960df": {}
+        "myappca3b592d": {}
       },
       "storage": {
-        "products": {}
+        "dbPetOrder": {},
+        "dbPetProduct": {}
       },
       "function": {
-        "petpartnerfunc": {
-          "deploymentBucketName": "amplify-myapp-dev-191027-deployment",
-          "s3Key": "amplify-builds/petpartnerfunc-426668526a394a634e7a-build.zip"
+        "petProductsApiFunc": {
+          "deploymentBucketName": "amplify-myapp-dev-175513-deployment",
+          "s3Key": "amplify-builds/petProductsApiFunc-4b614f6662596138614d-build.zip"
+        },
+        "orderApiFunc": {
+          "deploymentBucketName": "amplify-myapp-dev-175513-deployment",
+          "s3Key": "amplify-builds/orderApiFunc-42377073517a474f384b-build.zip"
         }
       },
       "api": {
-        "productapi": {}
+        "petPartnerAPI": {}
       }
     }
   }

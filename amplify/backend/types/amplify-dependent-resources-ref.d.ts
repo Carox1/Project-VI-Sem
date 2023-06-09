@@ -1,15 +1,16 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "productapi": {
+    "petPartnerAPI": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
     }
   },
   "auth": {
-    "myapp64d960df": {
+    "myappca3b592d": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
+      "CreatedSNSRole": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
       "UserPoolArn": "string",
@@ -18,7 +19,14 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "petpartnerfunc": {
+    "orderApiFunc": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "petProductsApiFunc": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -27,14 +35,20 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "products": {
+    "dbPetOrder": {
       "Arn": "string",
       "Name": "string",
       "PartitionKeyName": "string",
       "PartitionKeyType": "string",
       "Region": "string",
-      "SortKeyName": "string",
-      "SortKeyType": "string",
+      "StreamArn": "string"
+    },
+    "dbPetProduct": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
       "StreamArn": "string"
     }
   }

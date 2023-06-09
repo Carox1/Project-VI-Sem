@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/products": {
+      "name": "/products",
+      "lambdaFunction": "petProductsApiFunc",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/orders": {
+      "name": "/orders",
+      "lambdaFunction": "orderApiFunc",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

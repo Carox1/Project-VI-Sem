@@ -34,9 +34,8 @@ const UserInfo = () => {
           />
         </div>
         <div className={styles.right}>
-          <div className={styles.name}>Vikas Singh (Male)</div>
+          <div className={styles.name}>{name} ({gender})</div>
           <div className={styles.email}>{email}</div>
-          <div className={styles.phone}>9090909090</div>
         </div>
         <div />
       </div>
@@ -45,7 +44,7 @@ const UserInfo = () => {
           <tbody>
             <tr className={styles.table_row}>
               <th className={styles.table_head}>Address:</th>
-              <td className={styles.table_data}>Strada Vulcan 59, Brașov, România</td>
+              <td className={styles.table_data}>{address}</td>
             </tr>
             <tr className={styles.table_row}>
               <th className={styles.table_head}>Phone:</th>

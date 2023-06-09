@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "storage": {
+      "dbPetOrder": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

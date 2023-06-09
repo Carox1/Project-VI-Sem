@@ -1,34 +1,19 @@
-import { useEffect } from 'react';
-import Category from '../component/Category';
-import styles from '../styles/home.module.css';
-import { Slider } from '../component/Slider';
-import { API } from 'aws-amplify';
+import Category from "../component/Category";
+import styles from "../styles/home.module.css";
+import { Slider } from "../component/Slider";
 
 const Home = ({ data }) => {
-  useEffect(() => {
-    const apiName = 'productapi';
-    const path = '/pet';
-
-    const getfunc = () => {
-      API.get(apiName, path)
-        .then((response) => {
-          console.log(response);
-          // Add your code here
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    };
-
-    getfunc();
-  }, []);
-
+  const categories = [...new Set(data.map((item) => item.category))];
+  
   return (
     <div className={styles.home}>
       <Slider />
-      <Category className={styles.category} data={data} />
-      <Category className={styles.category} data={data} />
-      <Category className={styles.category} data={data} />
+      {categories.map((category) => {
+        const categoryData = data.filter((item) => item.category === category);
+        return (
+          <Category className={styles.category} key={category} items={categoryData} category={category}/>
+        );
+      })}
     </div>
   );
 };

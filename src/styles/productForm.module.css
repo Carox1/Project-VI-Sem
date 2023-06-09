@@ -1,0 +1,59 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: auto;
+  padding: 14px;
+  gap: 10px;
+}
+
+.inputElement {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  opacity: 0.7;
+  font-size: 18px;
+  padding: 2px 10px;
+}
+
+.input,
+.textArea,
+.select {
+  width: 300px;
+  height: 30px;
+  border: none;
+  background-color: #e8e3e3;
+  border-radius: 14px;
+}
+
+.input{
+    padding: 0 14px;
+}
+
+.input:focus,
+.textArea:focus,
+.select:focus,
+.option:focus {
+  outline: none;
+}
+
+.textArea {
+  height: 100px;
+}
+
+.select {
+  padding: 4px;
+}
+
+.button {
+  padding: 8px;
+  width: 120px;
+  background-color: teal;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 24px;
+  border: none;
+}

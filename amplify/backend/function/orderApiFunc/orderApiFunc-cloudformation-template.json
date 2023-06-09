@@ -16,17 +16,17 @@
     "s3Key": {
       "Type": "String"
     },
-    "storageproductsName": {
+    "storagedbPetOrderName": {
       "Type": "String",
-      "Default": "storageproductsName"
+      "Default": "storagedbPetOrderName"
     },
-    "storageproductsArn": {
+    "storagedbPetOrderArn": {
       "Type": "String",
-      "Default": "storageproductsArn"
+      "Default": "storagedbPetOrderArn"
     },
-    "storageproductsStreamArn": {
+    "storagedbPetOrderStreamArn": {
       "Type": "String",
-      "Default": "storageproductsStreamArn"
+      "Default": "storagedbPetOrderStreamArn"
     }
   },
   "Conditions": {
@@ -59,12 +59,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "petpartnerfunc",
+            "orderApiFunc",
             {
               "Fn::Join": [
                 "",
                 [
-                  "petpartnerfunc",
+                  "orderApiFunc",
                   "-",
                   {
                     "Ref": "env"
@@ -82,14 +82,14 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_PRODUCTS_NAME": {
-              "Ref": "storageproductsName"
+            "STORAGE_DBPETORDER_NAME": {
+              "Ref": "storagedbPetOrderName"
             },
-            "STORAGE_PRODUCTS_ARN": {
-              "Ref": "storageproductsArn"
+            "STORAGE_DBPETORDER_ARN": {
+              "Ref": "storagedbPetOrderArn"
             },
-            "STORAGE_PRODUCTS_STREAMARN": {
-              "Ref": "storageproductsStreamArn"
+            "STORAGE_DBPETORDER_STREAMARN": {
+              "Ref": "storagedbPetOrderStreamArn"
             }
           }
         },
@@ -110,12 +110,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "myappLambdaRole3f83702d",
+            "myappLambdaRole56067038",
             {
               "Fn::Join": [
                 "",
                 [
-                  "myappLambdaRole3f83702d",
+                  "myappLambdaRole56067038",
                   "-",
                   {
                     "Ref": "env"
@@ -204,23 +204,29 @@
             {
               "Effect": "Allow",
               "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
-                "dynamodb:Query"
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {
-                  "Ref": "storageproductsArn"
+                  "Ref": "storagedbPetOrderArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storageproductsArn"
+                        "Ref": "storagedbPetOrderArn"
                       },
                       "index/*"
                     ]

@@ -1,6 +1,6 @@
 {
   "api": {
-    "productapi": {
+    "petPartnerAPI": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,15 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "petpartnerfunc"
+          "resourceName": "petProductsApiFunc"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "orderApiFunc"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -16,7 +24,7 @@
     }
   },
   "auth": {
-    "myapp64d960df": {
+    "myappca3b592d": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -29,7 +37,9 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "NAME",
+          "PHONE_NUMBER"
         ],
         "socialProviders": [],
         "usernameAttributes": [],
@@ -42,7 +52,7 @@
     }
   },
   "function": {
-    "petpartnerfunc": {
+    "orderApiFunc": {
       "build": true,
       "dependsOn": [
         {
@@ -52,7 +62,23 @@
             "StreamArn"
           ],
           "category": "storage",
-          "resourceName": "products"
+          "resourceName": "dbPetOrder"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "petProductsApiFunc": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "dbPetProduct"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -60,25 +86,45 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_petpartnerfunc_deploymentBucketName": {
+    "AMPLIFY_function_orderApiFunc_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "petpartnerfunc"
+          "resourceName": "orderApiFunc"
         }
       ]
     },
-    "AMPLIFY_function_petpartnerfunc_s3Key": {
+    "AMPLIFY_function_orderApiFunc_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "petpartnerfunc"
+          "resourceName": "orderApiFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_petProductsApiFunc_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "petProductsApiFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_petProductsApiFunc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "petProductsApiFunc"
         }
       ]
     }
   },
   "storage": {
-    "products": {
+    "dbPetOrder": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "dbPetProduct": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

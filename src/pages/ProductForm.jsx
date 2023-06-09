@@ -1,46 +1,56 @@
-import React, { useState } from 'react';
+import { useState } from "react";
+import styles from "../styles/productForm.module.css";
+import { API } from "aws-amplify";
 
 const ProductForm = () => {
-  const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [isVaccinated, setIsVaccinated] = useState(false);
-  const [isNeutered, setIsNeutered] = useState(false);
-  const [category, setCategory] = useState('');
-  const [color, setColor] = useState('');
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
-  const [dose, setDose] = useState('');
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [title, setTitle] = useState("");
+  const [vendor, setVendor] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("Accessories");
+  const [color, setColor] = useState("");
+  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
+  const [dose, setDose] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Log all the form values
-    console.log({
-      price,
-      image,
-      title,
-      description,
-      isVaccinated,
-      isNeutered,
-      category,
-      color,
-      age,
-      weight,
-      dose,
-    });
+    const myInit = {
+      body: {
+        title: title,
+        price: price,
+        img: image,
+        desc: description,
+        category: category,
+        vendor: vendor,
+        dose: dose,
+        weight: weight,
+        color: color,
+        age: age,
+      },
+    };
+
+    API.post("petPartnerAPI", "/products", myInit)
+  .then((response) => {
+    console.log(myInit);
+    console.log(response)
+  })
+  .catch((error) => {
+    console.log(error.response);
+  });
+
     // Reset the form
-    setPrice('');
-    setImage('');
-    setTitle('');
-    setDescription('');
-    setIsVaccinated(false);
-    setIsNeutered(false);
-    setCategory('');
-    setColor('');
-    setAge('');
-    setWeight('');
-    setDose('');
+    setPrice("");
+    setImage("");
+    setTitle("");
+    setDescription("");
+    setVendor("");
+    setCategory("");
+    setColor("");
+    setAge("");
+    setWeight("");
+    setDose("");
   };
 
   const handleCategoryChange = (e) => {
@@ -48,91 +58,138 @@ const ProductForm = () => {
     setCategory(selectedCategory);
 
     // Reset the fields based on the selected category
-    setColor('');
-    setAge('');
-    setWeight('');
-    setDose('');
+    setColor("");
+    setAge("");
+    setWeight("");
+    setDose("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Price:
-        <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Image:
-        <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Title:
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Description:
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-      </label>
-      <br />
-      <label>
-        Vaccinated:
-        <input type="checkbox" checked={isVaccinated} onChange={(e) => setIsVaccinated(e.target.checked)} />
-      </label>
-      <br />
-      <label>
-        Neutered:
-        <input type="checkbox" checked={isNeutered} onChange={(e) => setIsNeutered(e.target.checked)} />
-      </label>
-      <br />
-      <label>
-        Category:
-        <select value={category} onChange={handleCategoryChange}>
-          <option value="">Select a category</option>
-          <option value="dog">Dog</option>
-          <option value="food">Food</option>
-          <option value="medicine">Medicine</option>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.inputElement}>
+        <label className={styles.label}>Title:</label>
+        <input
+          className={styles.input}
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className={styles.inputElement}>
+        <label className={styles.label}>Price:</label>
+        <input
+          className={styles.input}
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+      </div>
+      <div className={styles.inputElement}>
+        <label className={styles.label}>Vendor:</label>
+        <input
+          className={styles.input}
+          type="text"
+          value={vendor}
+          onChange={(e) => setVendor(e.target.value)}
+        />
+      </div>
+      <div className={styles.inputElement}>
+        <label className={styles.label}>Image:</label>
+        <input
+          className={styles.input}
+          type="text"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+        />
+      </div>
+      <div className={styles.inputElement}>
+        <label className={styles.label}>Description:</label>
+        <textarea
+          className={styles.textArea}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
+      </div>
+
+      <div className={styles.inputElement}>
+        <label className={styles.label}>Category:</label>
+        <select
+          className={styles.select}
+          value={category}
+          onChange={handleCategoryChange}
+        >
+          <option className={styles.option} value="">
+            Select a category
+          </option>
+          <option className={styles.option} value="Dog">
+            Dog
+          </option>
+          <option className={styles.option} value="Food">
+            Food
+          </option>
+          <option className={styles.option} value="Medicine">
+            Medicine
+          </option>
+          <option className={styles.option} value="Accessories">
+            Accessories
+          </option>
         </select>
-      </label>
-      <br />
+      </div>
 
-      {category === 'dog' && (
+      {category === "Dog" && (
         <>
-          <label>
-            Color:
-            <input type="text" value={color} onChange={(e) => setColor(e.target.value)} />
-          </label>
-          <br />
-          <label>
-            Age:
-            <input type="text" value={age} onChange={(e) => setAge(e.target.value)} />
-          </label>
-          <br />
+          <div className={styles.inputElement}>
+            <label className={styles.label}>Color:</label>
+            <input
+              className={styles.input}
+              type="text"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputElement}>
+            <label className={styles.label}>Age:</label>
+            <input
+              className={styles.input}
+              type="text"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
+          </div>
         </>
       )}
 
-      {category === 'food' && (
+      {category === "Food" && (
         <>
-          <label>
-            Weight:
-            <input type="text" value={weight} onChange={(e) => setWeight(e.target.value)} />
-          </label>
-          <br />
+          <div className={styles.inputElement}>
+            <label className={styles.label}>Weight:</label>
+            <input
+              className={styles.input}
+              type="text"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
+          </div>
         </>
       )}
 
-      {category === 'medicine' && (
+      {category === "Medicine" && (
         <>
-          <label>
-            Dose:
-            <input type="text" value={dose} onChange={(e) => setDose(e.target.value)} />
-          </label>
-          <br />
+          <div className={styles.inputElement}>
+            <label className={styles.label}>Dose:</label>
+            <input
+              className={styles.input}
+              type="text"
+              value={dose}
+              onChange={(e) => setDose(e.target.value)}
+            />
+          </div>
         </>
       )}
 
-      <button type="submit">Submit</button>
+      <button type="submit" className={styles.button}>
+        Submit
+      </button>
     </form>
   );
 };

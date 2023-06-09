@@ -1,0 +1,10 @@
+{
+  "resourceName": "dbPetOrder",
+  "tableName": "dbPetOrder",
+  "partitionKey": {
+    "fieldName": "orderId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

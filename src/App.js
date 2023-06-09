@@ -1,4 +1,14 @@
-import { Text,Image,View,useTheme,Heading,useAuthenticator,Button,Authenticator } from "@aws-amplify/ui-react";
+import {
+  Text,
+  Image,
+  View,
+  useTheme,
+  Heading,
+  useAuthenticator,
+  Button,
+  Authenticator,
+} from "@aws-amplify/ui-react";
+import { useState, useEffect } from "react";
 import "@aws-amplify/ui-react/styles.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./component/Footer";
@@ -6,10 +16,10 @@ import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import Products from "./pages/Products";
-
-import { data } from "./Data/data";
 import ProductForm from "./pages/ProductForm";
- 
+import { API } from "aws-amplify";
+import CategoryPage from "./pages/CategoryPage";
+
 const components = {
   Header() {
     const { tokens } = useTheme();
@@ -182,76 +192,91 @@ const components = {
 const formFields = {
   signIn: {
     username: {
-      placeholder: 'Enter your email',
+      placeholder: "Enter your email",
     },
   },
   signUp: {
     password: {
-      label: 'Password:',
-      placeholder: 'Enter your Password:',
+      label: "Password:",
+      placeholder: "Enter your Password:",
       isRequired: false,
       order: 2,
     },
     confirm_password: {
-      label: 'Confirm Password:',
+      label: "Confirm Password:",
       order: 1,
     },
   },
   forceNewPassword: {
     password: {
-      placeholder: 'Enter your Password:',
+      placeholder: "Enter your Password:",
     },
   },
   resetPassword: {
     username: {
-      placeholder: 'Enter your email:',
+      placeholder: "Enter your email:",
     },
   },
   confirmResetPassword: {
     confirmation_code: {
-      placeholder: 'Enter your Confirmation Code:',
-      label: 'New Label',
+      placeholder: "Enter your Confirmation Code:",
+      label: "New Label",
       isRequired: false,
     },
     confirm_password: {
-      placeholder: 'Enter your Password Please:',
+      placeholder: "Enter your Password Please:",
     },
   },
   setupTOTP: {
     QR: {
-      totpIssuer: 'test issuer',
-      totpUsername: 'amplify_qr_test_user',
+      totpIssuer: "test issuer",
+      totpUsername: "amplify_qr_test_user",
     },
     confirmation_code: {
-      label: 'New Label',
-      placeholder: 'Enter your Confirmation Code:',
+      label: "New Label",
+      placeholder: "Enter your Confirmation Code:",
       isRequired: false,
     },
   },
   confirmSignIn: {
     confirmation_code: {
-      label: 'New Label',
-      placeholder: 'Enter your Confirmation Code:',
+      label: "New Label",
+      placeholder: "Enter your Confirmation Code:",
       isRequired: false,
     },
   },
 };
 
 function App() {
+  const [data, setData] = useState([]);
+
+  const getData = (path) => {
+    API.get("petPartnerAPI", `/products`)
+      .then((response) => {
+        setData(response);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <Authenticator formFields={formFields} components={components}>
-      {({ signOut }) => 
-      <BrowserRouter>
-        <Navbar signOut={signOut} />
-        <Routes>
-        <Route path="/" element={<Home data={data}/>} />
-          <Route path="/new" element={<ProductForm/>} />
-          <Route path="/products" element={<Products data={data}/>} />
-          <Route path="/product/:id" element={<ProductPage />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-}
+      {({ signOut }) => (
+        <BrowserRouter>
+          <Navbar signOut={signOut} />
+          <Routes>
+            <Route path="/" element={<Home data={data} />} />
+            <Route path="/new" element={<ProductForm />} />
+            <Route path="/products" element={<Products data={data} />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/category/:category" element={<CategoryPage/>} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      )}
     </Authenticator>
   );
 }
