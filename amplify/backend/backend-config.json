@@ -24,7 +24,7 @@
     }
   },
   "auth": {
-    "myappca3b592d": {
+    "myapp2f0917ae": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {

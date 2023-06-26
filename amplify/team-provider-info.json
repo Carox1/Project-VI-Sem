@@ -13,11 +13,7 @@
     },
     "categories": {
       "auth": {
-        "myappca3b592d": {}
-      },
-      "storage": {
-        "dbPetOrder": {},
-        "dbPetProduct": {}
+        "myapp2f0917ae": {}
       },
       "function": {
         "orderApiFunc": {
@@ -29,8 +25,9 @@
           "s3Key": "amplify-builds/petProductsApiFunc-71574b7a61313978534e-build.zip"
         }
       },
-      "api": {
-        "petPartnerAPI": {}
+      "storage": {
+        "dbPetOrder": {},
+        "dbPetProduct": {}
       }
     }
   }

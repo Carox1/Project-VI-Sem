@@ -12,13 +12,7 @@
       "name": "/products",
       "lambdaFunction": "petProductsApiFunc",
       "permissions": {
-        "setting": "private",
-        "auth": [
-          "create",
-          "read",
-          "update",
-          "delete"
-        ]
+        "setting": "open"
       }
     }
   }

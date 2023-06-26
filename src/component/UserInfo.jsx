@@ -13,7 +13,7 @@ const UserInfo = () => {
       const user = await Auth.currentAuthenticatedUser();
       setName(user.attributes["custom:name"]);
       setEmail(user.attributes.email);
-      setPhone(user.attributes["custom:phone"]);
+      setPhone(user.attributes.phone_number);
       setGender(user.attributes["custom:gender"]);
       setAddress(user.attributes["custom:address"]);
     } catch (error) {
