@@ -1,20 +1,29 @@
-import { TabItem, Tabs } from '@aws-amplify/ui-react'
-import {useState} from 'react'
+import { TabItem, Tabs } from '@aws-amplify/ui-react';
+import { useState, useEffect } from 'react';
 import styles from "../styles/profile.module.css";
 import UserInfo from './UserInfo';
 import Orders from './Orders';
-import { API } from 'aws-amplify';
+import { API, Auth } from 'aws-amplify';
 
 const Profile = () => {
-const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [user, setUser] = useState({});
 
-  const getOrders = () => {
-    API.get('petPartnerApi', '/orders').then((response) => (
-      setData(response)
-    ))
-  }
+  const getOrders = async () => {
+    try {
+      const currentUser = await Auth.currentAuthenticatedUser();
+      setUser(currentUser);
 
-  console.log(data);
+      const response = await API.get('petPartnerAPI', `/orders/${currentUser.attributes.sub}`);
+      setData(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
 
   return (
     <div className={styles.profile}>
@@ -23,13 +32,17 @@ const [data, setData] = useState([])
           <UserInfo />
         </TabItem>
         <TabItem title="My Orders">
-          {data.map((item) => {
-            <Orders item={item}/>
-          })}
+          {data.length !== 0 ? 
+            data.map((item) => (
+              <Orders item={item} key={item.orderId} fetch={getOrders}/>
+            ))
+            :
+            <span>No Orders to show</span>
+          }
         </TabItem>
       </Tabs>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

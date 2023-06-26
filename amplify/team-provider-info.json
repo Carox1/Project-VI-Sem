@@ -18,7 +18,7 @@
       "function": {
         "orderApiFunc": {
           "deploymentBucketName": "amplify-myapp-dev-175513-deployment",
-          "s3Key": "amplify-builds/orderApiFunc-42377073517a474f384b-build.zip"
+          "s3Key": "amplify-builds/orderApiFunc-6c372f3271315456736c-build.zip"
         },
         "petProductsApiFunc": {
           "deploymentBucketName": "amplify-myapp-dev-175513-deployment",
@@ -28,6 +28,9 @@
       "storage": {
         "dbPetOrder": {},
         "dbPetProduct": {}
+      },
+      "api": {
+        "petPartnerAPI": {}
       }
     }
   }

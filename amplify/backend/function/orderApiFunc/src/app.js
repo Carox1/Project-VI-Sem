@@ -72,18 +72,36 @@ app.post('/orders', function (req, res) {
 * Example get method *
 ****************************/
 
-app.get('/orders', function (req, res) {
+async function getOrders(custId) {
   const params = {
     TableName: table
   };
 
-  dynamodb.scan(params, function (err, data) {
-    if (err) {
-      res.status(500).json({ message: 'Failed to retrieve contacts' });
-    } else {
-      res.json(data.Items);
-    }
-  });
+  if (custId) {
+    params.FilterExpression = "custId = :custId";
+    params.ExpressionAttributeValues = {
+      ":custId": custId
+    };
+  }
+
+  try {
+    const data = await dynamodb.scan(params).promise();
+    return data.Items;
+  } catch (err) {
+    console.error(err);
+    throw new Error('Failed to retrieve items from table');
+  }
+}
+
+app.get('/orders/:custId', async function (req, res) {
+  const custId = req.params.custId;
+  try {
+    const items = await getOrders(custId);
+    res.status(200).json(items);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to retrieve review' });
+  }
 });
 
 /****************************

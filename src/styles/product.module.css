@@ -16,7 +16,8 @@
 }
 .headimg {
   height: 450px;
-  width: auto;
+  width: 300px;
+  object-fit: cover;
 }
 .productInfo {
   display: flex;

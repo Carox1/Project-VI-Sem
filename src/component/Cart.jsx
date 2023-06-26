@@ -46,7 +46,7 @@ const Cart = () => {
                     email: 'test@razorpay.com',
                 },
                 handler: function (response) {
-                    const data = {
+                    const orderData = {
                         body: {
                             orderId: response.razorpay_order_id,
                             custId: user.attributes.sub,
@@ -59,9 +59,7 @@ const Cart = () => {
                         },
                     };
 
-                    console.log(data.body);
-
-                    API.post('petPartnerApi', '/orders', data)
+                    API.post('petPartnerAPI', '/orders', orderData)
                         .then((response) => {
                             console.log(response);
                             redirect('/');
